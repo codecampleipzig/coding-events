@@ -1,0 +1,11 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Pair Programming Session (Event title)",
+      "details": "Please bring pizza!",
+      "date": "MM/DD/YYYY hh:mm(Day the event takes place)",
+      "location": "Street address or webmeeting link"
+    }
+  ]
+}
