@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -24,7 +26,14 @@ export default {
   },
   methods: {
     submit() {
-      console.log(this.event);
+      axios
+        .post("http://localhost:3000/events", this.event)
+        .then(res => {
+          console.log("Created new event", res.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 };
