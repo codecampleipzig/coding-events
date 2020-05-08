@@ -8,5 +8,8 @@ describe("CreateEvent", () => {
     expect(wrapper.contains("h1")).toBe(true);
   });
 
-  // it should have a heading saying Create an Event
+  test("it has an <h1> heading with a Create an Event text content", () => {
+    const wrapper = mount(CreateEvent);
+    expect(wrapper.get("h1").text()).toBe("Create an Event");
+  });
 });
