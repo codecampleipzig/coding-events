@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Create an Event</h1>
-    <form>
+    <form @submit.prevent="submit">
       <input
         v-model="event.title"
         type="text"
@@ -21,6 +21,11 @@ export default {
         title: ""
       }
     };
+  },
+  methods: {
+    submit() {
+      console.log(this.event);
+    }
   }
 };
 </script>
