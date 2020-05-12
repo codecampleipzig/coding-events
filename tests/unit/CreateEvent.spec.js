@@ -88,6 +88,7 @@ describe("CreateEvent", () => {
     wrapper.get("input[name='title']").setValue("Go to the zoo");
 
     // User hits submit
+    createEvent.mockReturnValue({ data: { title: "", id: 1 } });
     wrapper.get("form").trigger("submit");
 
     expect(createEvent).toHaveBeenCalledWith({ title: "Go to the zoo" });
