@@ -34,20 +34,20 @@ describe("Dashboard", () => {
     getEvents.mockReset();
     getEvents.mockResolvedValue({ data: exampleEvents });
   });
-  test.skip("it should call getEvents when created", () => {
+  test("it should call getEvents when created", () => {
     shallowMount(Dashboard);
 
     expect(getEvents).toHaveBeenCalled();
   });
 
-  test.skip("it should set the data property events to the received events when created", async () => {
+  test("it should set the data property events to the received events when created", async () => {
     const wrapper = shallowMount(Dashboard);
 
     await getEvents.mock.results[0].value;
     expect(wrapper.vm.events).toEqual(exampleEvents);
   });
 
-  test.skip("it should contain an event card for each event", () => {
+  test("it should contain an event card for each event", () => {
     const wrapper = shallowMount(Dashboard, {
       data() {
         return {
@@ -59,7 +59,7 @@ describe("Dashboard", () => {
     expect(wrapper.findAll(EventCard)).toHaveLength(exampleEvents.length);
   });
 
-  test.skip("it should pass the event as a prop to each event card", () => {
+  test("it should pass the event as a prop to each event card", () => {
     const wrapper = shallowMount(Dashboard, {
       data() {
         return {

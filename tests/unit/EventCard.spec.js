@@ -20,7 +20,7 @@ describe("EventCard", () => {
     expect(wrapper).toBeDefined();
   });
 
-  test.skip("it should have a prop called event", () => {
+  test("it should have a prop called event", () => {
     const wrapper = mount(EventCard, {
       propsData: {
         event: exampleEvent,
@@ -30,7 +30,7 @@ describe("EventCard", () => {
     expect(wrapper.vm.event).toEqual(exampleEvent);
   });
 
-  test.skip("is should have an h2 with the event title", () => {
+  test("is should have an h2 with the event title", () => {
     const wrapper = mount(EventCard, {
       propsData: {
         event: exampleEvent,
@@ -40,7 +40,7 @@ describe("EventCard", () => {
     expect(wrapper.get("h2").text()).toBe(exampleEvent.title);
   });
 
-  test.skip("it should have a paragraph with the event details", () => {
+  test("it should have a paragraph with the event details", () => {
     const wrapper = mount(EventCard, {
       propsData: {
         event: exampleEvent,
@@ -52,7 +52,7 @@ describe("EventCard", () => {
     ).toBeTruthy();
   });
 
-  test.skip("it should have a paragraph which contains the event location", () => {
+  test("it should have a paragraph which contains the event location", () => {
     const wrapper = mount(EventCard, {
       propsData: {
         event: exampleEvent,
@@ -64,7 +64,7 @@ describe("EventCard", () => {
     ).toBeTruthy();
   });
 
-  test.skip("it should have an h3 with the event date formatted using Date.prototype.toDateString()", () => {
+  test("it should have an h3 with the event date formatted using Date.prototype.toDateString()", () => {
     const exampleDate = "2020-05-12T18:42:51.592Z";
     const wrapper = mount(EventCard, {
       propsData: {
