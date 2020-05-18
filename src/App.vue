@@ -5,6 +5,14 @@
       <router-link to="/events/new">Create Event</router-link>
     </div>
     <router-view />
+    <div class="notification-container">
+      <p
+        v-for="notification in $store.state.notifications"
+        :key="notification.id"
+      >
+        {{ notification.message }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -28,5 +36,19 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.notification-container {
+  position: fixed;
+  right: 1em;
+  bottom: 1em;
+  width: 300px;
+}
+
+.notification-container p {
+  background-color: rgba(0, 255, 0, 0.2);
+  color: green;
+  border-left: 3px solid green;
+  padding: 1em 0;
 }
 </style>

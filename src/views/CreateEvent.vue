@@ -49,6 +49,7 @@ export default {
     async submit() {
       try {
         await createEvent(this.event);
+        this.$store.dispatch("pushNotification", "A new event was created!");
         this.$router.push({ name: "dashboard" });
       } catch (error) {
         alert("Sorry, couldn't create entry, please check your inputs");
