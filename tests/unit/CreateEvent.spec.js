@@ -48,7 +48,10 @@ describe("CreateEvent", () => {
     const wrapper = mount(CreateEvent);
 
     expect(wrapper.vm.event).toEqual({
-      title: ""
+      title: "",
+      location: "",
+      details: "",
+      date: "",
     });
   });
 
@@ -86,11 +89,20 @@ describe("CreateEvent", () => {
 
     // User inputs a title
     wrapper.get("input[name='title']").setValue("Go to the zoo");
+    wrapper.get("input[name='location']").setValue("Zoo");
+    wrapper.get("input[name='date']").setValue("2020-05-14");
+    wrapper.get("input[name='details']").setValue("Details");
 
     // User hits submit
     createEvent.mockReturnValue({ data: { title: "", id: 1 } });
     wrapper.get("form").trigger("submit");
+    console.log(JSON.stringify(wrapper.vm.event));
 
-    expect(createEvent).toHaveBeenCalledWith({ title: "Go to the zoo" });
+    expect(createEvent).toHaveBeenCalledWith({
+      title: "Go to the zoo",
+      details: "Details",
+      location: "Zoo",
+      date: "2020-05-14",
+    });
   });
 });

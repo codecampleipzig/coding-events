@@ -9,19 +9,19 @@ const routes = [
   {
     path: "/",
     name: "dashboard",
-    component: Dashboard
+    component: Dashboard,
   },
   {
     path: "/events/new",
     name: "create-event",
-    component: CreateEvent
-  }
+    component: CreateEvent,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;
