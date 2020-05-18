@@ -36,7 +36,7 @@ export default new Vuex.Store({
 
       setTimeout(() => {
         context.commit("REMOVE_NOTIFICATION", notification);
-      }, 5000);
+      }, 2000);
     },
   },
 });

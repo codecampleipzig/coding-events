@@ -5,18 +5,52 @@
       <router-link to="/events/new">Create Event</router-link>
     </div>
     <router-view />
-    <div class="notification-container">
-      <p
-        v-for="notification in $store.state.notifications"
-        :key="notification.id"
+    <transition appear name="fade">
+      <div
+        class="notification-container"
+        v-if="$store.state.notifications.length > 0"
       >
-        {{ notification.message }}
-      </p>
-    </div>
+        <div
+          v-for="notification in $store.state.notifications"
+          :key="notification.id"
+        >
+          <p>
+            {{ notification.message }}
+          </p>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <style>
+.fade-enter {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-enter-to {
+  opacity: 1;
+  transform: none;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  transition: all 1s;
+}
+
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-100vh) translateX(-100vw) scale(5);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
