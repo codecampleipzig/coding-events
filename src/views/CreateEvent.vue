@@ -26,7 +26,7 @@
         name="location"
         placeholder="Where is the event going to happen?"
       />
-      <input type="submit" value="Create" />
+      <button type="submit">Create</button>
     </form>
   </div>
 </template>
@@ -59,11 +59,4 @@ export default {
 };
 </script>
 
-<style scoped>
-form {
-  display: grid;
-  gap: 2em;
-  max-width: 500px;
-  margin: 0 auto;
-}
-</style>
+<style scoped></style>

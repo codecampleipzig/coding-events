@@ -1,15 +1,17 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div v-if="!$store.state.user" id="nav">
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Register</router-link>
+    </div>
+    <div v-else id="nav">
       <router-link to="/">Dashboard</router-link> |
-      <router-link to="/events/new">Create Event</router-link>
+      <router-link to="/events/new">Create Event</router-link> |
+      <a href="#" @click="$store.dispatch('logout')">Logout</a>
     </div>
     <router-view />
-    <transition appear name="fade">
-      <div
-        class="notification-container"
-        v-if="$store.state.notifications.length > 0"
-      >
+    <div class="notification-container">
+      <transition-group tag="span" name="list">
         <div
           v-for="notification in $store.state.notifications"
           :key="notification.id"
@@ -18,37 +20,37 @@
             {{ notification.message }}
           </p>
         </div>
-      </div>
-    </transition>
+      </transition-group>
+    </div>
   </div>
 </template>
 
 <style>
-.fade-enter {
+.list-enter {
   opacity: 0;
   transform: scaleY(0);
 }
 
-.fade-enter-active {
+.list-enter-active {
   transition: all 1s;
 }
 
-.fade-enter-to {
+.list-enter-to {
   opacity: 1;
   transform: none;
 }
 
-.fade-leave {
+.list-leave {
   opacity: 1;
 }
 
-.fade-leave-active {
+.list-leave-active {
   transition: all 1s;
 }
 
-.fade-leave-to {
+.list-leave-to {
   opacity: 0;
-  transform: translateY(-100vh) translateX(-100vw) scale(5);
+  transform: translateY(200px);
 }
 
 #app {
@@ -57,6 +59,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  max-width: 400px;
+  margin: auto;
 }
 
 #nav {
@@ -84,5 +88,33 @@
   color: green;
   border-left: 3px solid green;
   padding: 1em 0;
+}
+
+input {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.2em;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid lightgrey;
+  outline: none;
+  font-family: inherit;
+}
+
+button {
+  font-size: 1rem;
+  -webkit-appearance: none;
+  -moz-appearnce: none;
+  border: 1px solid #42b983;
+  color: #42b983;
+  outline: none;
+  width: auto;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  font-family: inherit;
+  border-radius: 3px;
+  font-weight: 500;
 }
 </style>
