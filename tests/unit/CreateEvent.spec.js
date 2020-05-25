@@ -1,6 +1,7 @@
-import { mount } from "@vue/test-utils";
+import { mount, createLocalVue } from "@vue/test-utils";
 import CreateEvent from "@/views/CreateEvent.vue";
 import { createEvent } from "@/services/event-service.js";
+import Vuex from "vuex";
 
 // Jest wizardry
 jest.mock("@/services/event-service.js");
@@ -85,7 +86,23 @@ describe("CreateEvent", () => {
 
   test("it should call the event service, after the user has input a title and hit submit", () => {
     createEvent.mockReset();
-    const wrapper = mount(CreateEvent);
+    const localVue = createLocalVue();
+    localVue.use(Vuex);
+
+    const store = new Vuex.Store({
+      actions: {
+        pushNotification: jest.fn(),
+      },
+    });
+    const wrapper = mount(CreateEvent, {
+      localVue,
+      store,
+      mocks: {
+        $router: {
+          push: jest.fn(),
+        },
+      },
+    });
 
     // User inputs a title
     wrapper.get("input[name='title']").setValue("Go to the zoo");
@@ -94,9 +111,10 @@ describe("CreateEvent", () => {
     wrapper.get("input[name='details']").setValue("Details");
 
     // User hits submit
-    createEvent.mockReturnValue({ data: { title: "", id: 1 } });
+    createEvent.mockReturnValue({
+      data: { title: "", location: "", date: "", details: "", id: 1 },
+    });
     wrapper.get("form").trigger("submit");
-    console.log(JSON.stringify(wrapper.vm.event));
 
     expect(createEvent).toHaveBeenCalledWith({
       title: "Go to the zoo",
