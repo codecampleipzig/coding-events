@@ -27,16 +27,17 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    pushNotification(context, message) {
+    pushNotification(context, { type, message }) {
       const notification = {
         id: getNewId(),
+        type: type || "success",
         message,
       };
       context.commit("PUSH_NOTIFICATION", notification);
 
       setTimeout(() => {
         context.commit("REMOVE_NOTIFICATION", notification);
-      }, 2000);
+      }, 6000);
     },
   },
 });

@@ -26,7 +26,7 @@
         name="location"
         placeholder="Where is the event going to happen?"
       />
-      <input type="submit" value="Create" />
+      <button type="submit">Create</button>
     </form>
   </div>
 </template>
@@ -49,21 +49,20 @@ export default {
     async submit() {
       try {
         await createEvent(this.event);
-        this.$store.dispatch("pushNotification", "A new event was created!");
+        this.$store.dispatch("pushNotification", {
+          message: "A new event was created!",
+          type: "success",
+        });
         this.$router.push({ name: "dashboard" });
       } catch (error) {
-        alert("Sorry, couldn't create entry, please check your inputs");
+        this.$store.dispatch("pushNotification", {
+          message: "Sorry, couldn't create entry, please check your inputs",
+          type: "error",
+        });
       }
     },
   },
 };
 </script>
 
-<style scoped>
-form {
-  display: grid;
-  gap: 2em;
-  max-width: 500px;
-  margin: 0 auto;
-}
-</style>
+<style scoped></style>
