@@ -88,5 +88,16 @@ export default new Vuex.Store({
     logout(context) {
       context.commit("REMOVE_USER_DATA");
     },
+    async uploadAvatar(context, avatar) {
+      const user = context.state.userData.user;
+      const formData = new FormData();
+      formData.set("data", JSON.stringify({ user: user.id }));
+      formData.set("files.avatar", avatar);
+      await axios.post(process.env.VUE_APP_API_URL + "/profiles", formData, {
+        "Content-Type": "multipart/form-data",
+      });
+      const res = await axios.get(process.env.VUE_APP_API_URL + "/users/me");
+      context.commit("SET_USER_DATA", res.data);
+    },
   },
 });
