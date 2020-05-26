@@ -31,10 +31,10 @@ describe("CreateEvent", () => {
     expect(wrapper.contains("input[name='title'][type='text']")).toBe(true);
   });
 
-  test("it should contain a submit button with the value Create", () => {
+  test("it should contain a submit button with the text content Create", () => {
     const wrapper = mount(CreateEvent);
 
-    expect(wrapper.contains("input[value='Create'][type='submit']")).toBe(true);
+    expect(wrapper.get("button").text()).toBe("Create");
   });
 
   test("it should contain an input field for the title with the placeholder 'Add a Title'", () => {

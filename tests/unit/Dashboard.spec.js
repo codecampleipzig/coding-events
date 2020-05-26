@@ -1,7 +1,8 @@
-import { shallowMount } from "@vue/test-utils";
+import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Dashboard from "@/views/Dashboard.vue";
 import { getEvents } from "@/services/event-service.js";
 import EventCard from "@/components/EventCard.vue";
+import Vuex from "vuex";
 
 jest.mock("@/services/event-service.js");
 
@@ -30,18 +31,28 @@ const exampleEvents = [
 ];
 
 describe("Dashboard", () => {
+  let localVue = createLocalVue();
+  localVue.use(Vuex);
+  const store = new Vuex.Store({});
+
   beforeEach(() => {
     getEvents.mockReset();
     getEvents.mockResolvedValue({ data: exampleEvents });
   });
   test("it should call getEvents when created", () => {
-    shallowMount(Dashboard);
+    shallowMount(Dashboard, {
+      localVue,
+      store,
+    });
 
     expect(getEvents).toHaveBeenCalled();
   });
 
   test("it should set the data property events to the received events when created", async () => {
-    const wrapper = shallowMount(Dashboard);
+    const wrapper = shallowMount(Dashboard, {
+      localVue,
+      store,
+    });
 
     await getEvents.mock.results[0].value;
     expect(wrapper.vm.events).toEqual(exampleEvents);
@@ -54,6 +65,8 @@ describe("Dashboard", () => {
           events: exampleEvents,
         };
       },
+      localVue,
+      store,
     });
 
     expect(wrapper.findAll(EventCard)).toHaveLength(exampleEvents.length);
@@ -66,6 +79,8 @@ describe("Dashboard", () => {
           events: exampleEvents,
         };
       },
+      localVue,
+      store,
     });
 
     wrapper.findAll(EventCard).wrappers.every((eventCard, index) => {
