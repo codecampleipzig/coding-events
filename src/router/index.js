@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Dashboard from "@/views/Dashboard.vue";
 import CreateEvent from "@/views/CreateEvent.vue";
 import Login from "@/views/Login.vue";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,14 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  // If not authenticated redirect to login
+  if (to.name != "login" && store.state.userData == null) {
+    return next({ name: "login" });
+  }
+  next();
 });
 
 export default router;
