@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <div v-if="$store.state.userData == null" id="nav">
-      <router-link :to="{ name: 'login' }">Login</router-link>
+      <router-link :to="{ name: 'login' }">Login</router-link> |
+      <router-link :to="{ name: 'register' }">Register</router-link>
     </div>
     <div v-else id="nav">
       <router-link :to="{ name: 'dashboard' }">Dashboard</router-link> |

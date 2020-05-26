@@ -51,6 +51,15 @@ export default new Vuex.Store({
         context.commit("REMOVE_NOTIFICATION", notification);
       }, 6000);
     },
+    async register(context, user) {
+      // Make a POST request to /auth/local
+      const res = await axios.post(
+        process.env.VUE_APP_API_URL + "/auth/local/register",
+        user
+      );
+
+      context.commit("SET_USER_DATA", res.data);
+    },
     async login(context, { email, password }) {
       console.log("login", email, password);
 
