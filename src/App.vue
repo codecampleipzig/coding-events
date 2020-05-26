@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Dashboard</router-link> |
-      <router-link to="/events/new">Create Event</router-link>
+      <router-link :to="{ name: 'login' }">Login</router-link>
+    </div>
+    <div id="nav">
+      <router-link :to="{ name: 'dashboard' }">Dashboard</router-link> |
+      <router-link :to="{ name: 'create-event' }">Create Event</router-link>
     </div>
     <router-view />
     <div class="notification-container">
