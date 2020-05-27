@@ -1,7 +1,14 @@
 <template>
   <div>
     <h1>Register</h1>
+    <div class="avatar-preview">
+      <p>Preview</p>
+    </div>
     <form @submit.prevent="submit">
+      <label class="file-upload">
+        Upload Avatar
+        <input type="file"
+      /></label>
       <input
         v-model="user.username"
         type="text"
@@ -54,4 +61,32 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-upload {
+  border: 1px solid lightgrey;
+  color: grey;
+  width: auto;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  border-radius: 3px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.avatar-preview {
+  width: 100px;
+  height: 100px;
+  border: 1px solid lightgrey;
+  color: grey;
+  margin: 0.8rem auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
