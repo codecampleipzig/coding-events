@@ -2,7 +2,7 @@
   <div>
     <h1>Dashboard</h1>
     <img v-if="avatarURL" :src="avatarURL" class="avatar" />
-    <p>{{ $store.state.userData.user.username }}</p>
+    <p>{{ username }}</p>
     <EventCard
       v-for="event in events"
       :key="event.id"
@@ -35,6 +35,10 @@ export default {
       if (!profile) return null;
 
       return process.env.VUE_APP_UPLOAD_URL + profile.avatar.url;
+    },
+    username() {
+      const userData = this.$store.state.userData;
+      return userData ? userData.user.username : "";
     },
   },
   async created() {
